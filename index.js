@@ -206,5 +206,4 @@ client.on('interactionCreate', async (interaction) => {
 
 
 // botログイン
-const token = process.env['TOKEN']
-client.login(token);
+client.login("OTQ2NTg3MjYzNjkxNzg4Mzk5.GgzTI0.vbqAgKeJoTr32S4kB6mSujXRuOv6x_AwQmzNeM");
