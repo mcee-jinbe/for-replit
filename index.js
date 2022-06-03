@@ -1,3 +1,10 @@
+const http = require('http');
+http.createServer(function(req, res) {
+   // dezikuri-maikura.cf
+  res.write("Discord bot is active!\nPleace check it.");
+  res.end();
+}).listen(8080);
+
 // Discord bot implements
 const Discord = require("discord.js");
 const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES] });
@@ -24,44 +31,70 @@ client.on("ready", () => {
 // botがメッセージを受信すると発動され、 上から順に処理される。
 client.on("messageCreate", async message => {
   // プレフィクスが要らない系コマンド
-  if (message.content.match(/omikuji/)||message.content.match(/jinbe/)) {
-    if (message.content.match(/jinbeおはよう/)||message.content.match(/おはようjinbe/)) {
-      message.channel.send("おはよう！");
-    } else if (message.content.match(/jinbeこんにちは/)||message.content.match(/こんにちはjinbe/)) {
-      message.channel.send("こんにちわああああ！");
-    } else if (message.content.match(/jinbeこんばんは/)||message.content.match(/こんばんはjinbe/)) {
-      message.channel.send("こんばんわ！！");
-    } else if (message.content.match(/jinbeおやすみ/)||message.content.match(/おやすみjinbe/)) {
-      message.channel.send("おやすみ～\nいい夢見てね…");
-    } else if (message.content === "omikuji" || message.content === "jinbe" || message.content === "omikujinbe") {
-      const tic1 = new Discord.MessageButton()
-        .setCustomId("omi1")
-        .setStyle("PRIMARY")
-        .setLabel("１を引く");
-      const tic2 = new Discord.MessageButton()
-        .setCustomId("omi2")
-        .setStyle("SUCCESS")
-        .setLabel("2を引く");
-      const tic3 = new Discord.MessageButton()
-        .setCustomId("omi3")
-        .setStyle("DANGER")
-        .setLabel("3を引く");
-      const replay = await message.channel.send({
-        embeds: [
-          {
-            title: "↓直感で押して！↓",
-            color: 0xFF0000,
-            thumbnail: {
-              url: "https://3.bp.blogspot.com/-cPqdLavQBXA/UZNyKhdm8RI/AAAAAAAASiM/NQy6g-muUK0/s400/syougatsu2_omijikuji2.png"
-            }
+  if (message.content.match(/jinbeおはよう/)||message.content.match(/おはようjinbe/)) {
+    message.channel.send("おはよう！");
+  } else if (message.content.match(/jinbeこんにちは/)||message.content.match(/こんにちはjinbe/)) {
+    message.channel.send("こんにちわああああ！");
+  } else if (message.content.match(/jinbeこんばんは/)||message.content.match(/こんばんはjinbe/)) {
+    message.channel.send("こんばんわ！！");
+  } else if (message.content.match(/jinbeおやすみ/)||message.content.match(/おやすみjinbe/)) {
+    message.channel.send("おやすみ～\nいい夢見てね…");
+  } else if (message.content === "omikuji" || message.content === "jinbe" || message.content === "omikujinbe") {
+    const tic1 = new Discord.MessageButton()
+      .setCustomId("omi1")
+      .setStyle("PRIMARY")
+      .setLabel("１を引く");
+    const tic2 = new Discord.MessageButton()
+      .setCustomId("omi2")
+      .setStyle("SUCCESS")
+      .setLabel("2を引く");
+    const tic3 = new Discord.MessageButton()
+      .setCustomId("omi3")
+      .setStyle("DANGER")
+      .setLabel("3を引く");
+    const replay = await message.channel.send({
+      embeds: [
+        {
+          title: "↓直感で押して！↓",
+          color: 0xFF0000,
+          thumbnail: {
+            url: "https://3.bp.blogspot.com/-cPqdLavQBXA/UZNyKhdm8RI/AAAAAAAASiM/NQy6g-muUK0/s400/syougatsu2_omijikuji2.png"
           }
-        ],
-        components: [new Discord.MessageActionRow().addComponents(tic1, tic2, tic3)]
-      });
+        }
+      ],
+      components: [new Discord.MessageActionRow().addComponents(tic1, tic2, tic3)]
+    });
 
-      await wait(6000)
-      replay.delete()
-    }
+    await wait(6000)
+    replay.delete()
+  } else if (message.content === 'janken') {
+    const pa = new Discord.MessageButton()
+      .setCustomId("pa")
+      .setStyle("PRIMARY")
+      .setLabel("パー");
+    const cho = new Discord.MessageButton()
+      .setCustomId("cho")
+      .setStyle("SUCCESS")
+      .setLabel("チョキ");
+    const gu = new Discord.MessageButton()
+      .setCustomId("gu")
+      .setStyle("DANGER")
+      .setLabel("グー");
+    const replay = await message.channel.send({
+      embeds: [
+        {
+          title: "↓何を出す？！↓",
+          color: 0xFF0000,
+          thumbnail: {
+            url: "https://tsukatte.com/wp-content/uploads/2019/03/janken-520x520.png"
+          }
+        }
+      ],
+      components: [new Discord.MessageActionRow().addComponents(pa,cho,gu)]
+    });
+
+    await wait(6000)
+    replay.delete()
   }
 
 
@@ -71,7 +104,18 @@ client.on("messageCreate", async message => {
   const args = message.content.slice(prefix.length).trim().split(' ');
   const command = args.shift().toLowerCase();
 
-  if (command === 'about') {
+  if (command === '2022') {
+    message.channel.send({
+      embeds: [
+        {
+          title: 'これ以降は2022年度の情報です！',
+          color: 0xFF0000,
+          timestamp: new Date()
+        }
+      ]
+    });
+    message.delete();
+  } else if (command === 'about') {
     const tic4 = new Discord.MessageButton()
       .setStyle("LINK")
       .setLabel("BOTを招待する")
@@ -107,7 +151,7 @@ client.on("messageCreate", async message => {
       embeds: [
         {
           title: "HELP",
-          description: "`omikuji`：おみくじを引きます。\n　`mc!help_omikuji`で、もっと詳しい内容を表示できます。\n\n`mc!aisatu_list`:挨拶のリストを表示します。\n\n`mc!help`：このメッセージを表示します。\n\n`mc!about`：このBOTについて書かれています。\n\n`mc!ping`：このBOTのPing値を知ることが出来ます。\n　※このBOTのプロフィール欄にも書かれています。\n  （定期更新）\n\n`mc!code`：このBOTのプログラムを全公開！(笑)",
+          description: "`omikuji`：おみくじを引きます。\n　`mc!help_omikuji`で、もっと詳しい内容を表示できます。\n\n`janken`：<@946587263691788399>とじゃんけんが出来ます。\n\n`mc!aisatu_list`:挨拶のリストを表示します。\n\n`mc!help`：このメッセージを表示します。\n\n`mc!about`：このBOTについて書かれています。\n\n`mc!ping`：このBOTのPing値を知ることが出来ます。\n　※このBOTのプロフィール欄にも書かれています。\n  （定期更新）\n\n`mc!code`：このBOTのプログラムを全公開！(笑)",
           color: 0x227fff,
           timestamp: new Date(),
           thumbnail: {
@@ -202,8 +246,116 @@ client.on('interactionCreate', async (interaction) => {
       ],
     });
   }
+
+// じゃんけんの処理
+  if (interaction.customId === "pa" || interaction.customId === "cho" || interaction.customId === "gu") {
+    // じんべえの手を決める
+    const arr = ['pa', 'cho', 'gu'];
+    const random = Math.floor(Math.random() * arr.length);
+    const jinbe = arr[random];
+
+    // 自分の手を「me」に代入
+    if (interaction.customId === "pa") {
+      var me = "pa"
+    } else if (interaction.customId === "cho") {
+      var me = "cho"
+    } else if (interaction.customId === "gu") {
+      var me = "gu"
+    }
+
+    // 結果判定    
+    // 自分がパーの時
+    if (interaction.customId === "pa") {
+      if (jinbe === "pa") {
+        var jan_result = "aiko" 
+      } else if (jinbe === "cho") {
+        var jan_result = "lose"
+      } else if (jinbe === "gu") {
+        var jan_result = "win"
+      }
+     // 自分がチョキの時
+    } else if (interaction.customId === "cho") {
+      if (jinbe === "pa") {
+        var jan_result = "win" 
+      } else if (jinbe === "cho") {
+        var jan_result = "aiko"
+      } else if (jinbe === "gu") {
+        var jan_result = "lose"
+      }
+    } else if (interaction.customId === "gu") {
+      // 自分がグーの時
+      if (jinbe === "pa") {
+        var jan_result = "lose" 
+      } else if (jinbe === "cho") {
+        var jan_result = "win"
+      } else if (jinbe === "gu") {
+        var jan_result = "aiko"
+      }
+    }
+
+    // 変数調整
+    //me変数の日本語化
+    if (me === "pa") {
+      var result_me = "パー"
+    } else if (me === "cho") {
+      var result_me = "チョキ"
+    } else if (me === "gu") {
+      var result_me = "グー"
+    }
+    //jinbe変数の日本語化
+    if (jinbe === "pa") {
+      var result_jinbe = "パー"
+    } else if (jinbe === "cho") {
+      var result_jinbe = "チョキ"
+    } else if (jinbe === "gu") {
+      var result_jinbe = "グー"
+    }
+    //結果の日本語化
+    if (jan_result === "win") {
+      var result_jinbe_jp = "あなたの勝ち"
+    } else if (jan_result === "aiko") {
+      var result_jinbe_jp = "あいこ"
+    } else if (jan_result === "lose") {
+      var result_jinbe_jp = "あなたの負け"
+    }
+
+    // 色調整
+    if (jan_result === "win") {
+      var color = 0xFF0000
+    } else if (jan_result === "aiko") {
+      var color = 0xFFFF00
+    } else if (jan_result === "lose") {
+      var color = 0x0000FF
+    }
+
+    // file_pass設定
+    if (jan_result === "win") {
+      var file_pas = "photos/win.png"
+    } else if (jan_result === "aiko") {
+      var file_pas = "photos/aiko.png"
+    } else if (jan_result === "lose") {
+      var file_pas = "photos/lose.png"
+    }
+
+    // 結果表示
+    await interaction.channel.send({
+      embeds: [
+        {
+          title: 'じゃんけんの結果！',
+          description: 'あなたは ' + result_me + 'を出して、\n私は　' + result_jinbe + 'を出したので、\n\n__**' + result_jinbe_jp + 'です！**__',
+          color: color,
+          thumbnail: {
+            url: 'attachment://omi_kekka.png'
+          }
+        }
+      ],
+      files: [{ attachment: file_pas, name: "omi_kekka.png" }
+      ],
+    });
+  }
 });
 
 
 // botログイン
-client.login("OTQ2NTg3MjYzNjkxNzg4Mzk5.GgzTI0.vbqAgKeJoTr32S4kB6mSujXRuOv6x_AwQmzNeM");
+const token = process.env['TOKEN']
+client.login(token);
