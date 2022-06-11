@@ -193,7 +193,7 @@ client.on("messageCreate", async message => {
           description: "転用可",
           color: 0x227fff
         }
-      ],
+      ]
     });
   } else {
     message.channel.send({
