@@ -151,7 +151,7 @@ client.on("messageCreate", async message => {
       embeds: [
         {
           title: "HELP",
-          description: "`omikuji`：おみくじを引きます。\n　`mc!help_omikuji`で、もっと詳しい内容を表示できます。\n\n`janken`：<@946587263691788399>とじゃんけんが出来ます。\n\n`mc!aisatu_list`:挨拶のリストを表示します。\n\n`mc!help`：このメッセージを表示します。\n\n`mc!about`：このBOTについて書かれています。\n\n`mc!ping`：このBOTのPing値を知ることが出来ます。\n　※このBOTのプロフィール欄にも書かれています。\n  （定期更新）\n\n`mc!code`：このBOTのプログラムを全公開！(笑)",
+          description: "`omikuji`：おみくじを引きます。\n　`mc!help_omikuji`で、もっと詳しい内容を表示できます。\n\n`janken`：<@946587263691788399>とじゃんけんが出来ます。\n\n`mc!aisatu_list`:挨拶のリストを表示します。\n\n`mc!help`：このメッセージを表示します。\n\n`mc!about`：このBOTについて書かれています。\n\n`mc!ping`：このBOTのPing値を知ることが出来ます。\n　※このBOTのプロフィール欄にも書かれています。\n  （定期更新）\n\n`mc!`：このBOTのプログラムを全公開！(笑)",
           color: 0x227fff,
           timestamp: new Date(),
           thumbnail: {
@@ -159,7 +159,7 @@ client.on("messageCreate", async message => {
           }
         }
       ],
-      files: [{ attachment: "photos/jinbe_yoshi.png", name: "file.png" }
+      files: [{ attachment: "https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/photos/jinbe_yoshi.png", name: "file.png" }
       ],
     })
   } else if (command === "aisatu_list") {
@@ -193,7 +193,7 @@ client.on("messageCreate", async message => {
           color: 0x227fff
         }
       ],
-      files: ['index.js']
+      files: ['https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/index.js']
     });
   } else {
     message.channel.send({
@@ -216,11 +216,11 @@ client.on('interactionCreate', async (interaction) => {
     const result = arr[random];
     
     if (random === 4 || random === 7) {
-      var file_pas = "photos/jinbe_pien.png";
+      var file_pas = "https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/photos/jinbe_pien.png";
     } else if (random === 5) {
-      var file_pas = "photos/jinbe_pien2.png";
+      var file_pas = "https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/photos/jinbe_pien2.png";
     } else {
-      var file_pas = "photos/jinbe.png";
+      var file_pas = "https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/photos/jinbe.png";
     }
 
     if (interaction.customId === "omi1") {
@@ -330,11 +330,11 @@ client.on('interactionCreate', async (interaction) => {
 
     // file_pass設定
     if (jan_result === "win") {
-      var file_pas = "photos/win.png"
+      var file_pas = "https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/photos/win.png"
     } else if (jan_result === "aiko") {
-      var file_pas = "photos/aiko.png"
+      var file_pas = "https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/photos/aiko.png"
     } else if (jan_result === "lose") {
-      var file_pas = "photos/lose.png"
+      var file_pas = "https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/photos/lose.png"
     }
 
     // 結果表示
