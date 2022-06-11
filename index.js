@@ -1,9 +1,3 @@
-const http = require('http');
-http.createServer(function(req, res) {
-   // dezikuri-maikura.cf
-  res.write("Discord bot is active!\nPleace check it.");
-  res.end();
-}).listen(8080);
 // Discord bot implements
 const Discord = require("discord.js");
 const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES] });
