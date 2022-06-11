@@ -4,19 +4,16 @@ http.createServer(function(req, res) {
   res.write("Discord bot is active!\nPleace check it.");
   res.end();
 }).listen(8080);
-
 // Discord bot implements
 const Discord = require("discord.js");
 const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES] });
 const prefix = "mc!"
 const util = require('util')
 const wait = util.promisify(setTimeout);
-
 // botが準備できれば発動され、 上から順に処理される。
 client.on("ready", () => {
   // コンソールにReady!!と表示
   console.log("Ready!!");
-
   // ステータスを設定する
   setInterval(() => {
     client.user.setActivity({
@@ -24,10 +21,8 @@ client.on("ready", () => {
     })
   }, 10000)
   client.channels.cache.get("913953017550745618").send("起動しました！");
-
   // readyイベントここまで
 });
-
 // botがメッセージを受信すると発動され、 上から順に処理される。
 client.on("messageCreate", async message => {
   // プレフィクスが要らない系コマンド
@@ -64,7 +59,6 @@ client.on("messageCreate", async message => {
       ],
       components: [new Discord.MessageActionRow().addComponents(tic1, tic2, tic3)]
     });
-
     await wait(6000)
     replay.delete()
   } else if (message.content === 'janken') {
@@ -92,18 +86,13 @@ client.on("messageCreate", async message => {
       ],
       components: [new Discord.MessageActionRow().addComponents(pa,cho,gu)]
     });
-
     await wait(6000)
     replay.delete()
   }
-
-
   // プレフィクスが必要系コマンド
   if (!message.content.startsWith(prefix) || message.author.bot) return;
-
   const args = message.content.slice(prefix.length).trim().split(' ');
   const command = args.shift().toLowerCase();
-
   if (command === '2022') {
     message.channel.send({
       embeds: [
@@ -131,7 +120,7 @@ client.on("messageCreate", async message => {
         }
       }
       ],
-      files: [{ attachment: "https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/photos/jinbe_yoshi.png", name: "file.png" }
+      files: [{ attachment: "photos/jinbe_yoshi.png", name: "file.png" }
       ],
       components: [new Discord.MessageActionRow().addComponents(tic4)]
     });
@@ -151,7 +140,7 @@ client.on("messageCreate", async message => {
       embeds: [
         {
           title: "HELP",
-          description: "`omikuji`：おみくじを引きます。\n　`mc!help_omikuji`で、もっと詳しい内容を表示できます。\n\n`janken`：<@946587263691788399>とじゃんけんが出来ます。\n\n`mc!aisatu_list`:挨拶のリストを表示します。\n\n`mc!help`：このメッセージを表示します。\n\n`mc!about`：このBOTについて書かれています。\n\n`mc!ping`：このBOTのPing値を知ることが出来ます。\n　※このBOTのプロフィール欄にも書かれています。\n  （定期更新）\n\n`mc!`：このBOTのプログラムを全公開！(笑)",
+          description: "`omikuji`：おみくじを引きます。\n　`mc!help_omikuji`で、もっと詳しい内容を表示できます。\n\n`janken`：<@946587263691788399>とじゃんけんが出来ます。\n\n`mc!aisatu_list`:挨拶のリストを表示します。\n\n`mc!help`：このメッセージを表示します。\n\n`mc!about`：このBOTについて書かれています。\n\n`mc!ping`：このBOTのPing値を知ることが出来ます。\n　※このBOTのプロフィール欄にも書かれています。\n  （定期更新）\n\n`mc!code`：このBOTのプログラムを全公開！(笑)",
           color: 0x227fff,
           timestamp: new Date(),
           thumbnail: {
@@ -159,7 +148,7 @@ client.on("messageCreate", async message => {
           }
         }
       ],
-      files: [{ attachment: "https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/photos/jinbe_yoshi.png", name: "file.png" }
+      files: [{ attachment: "photos/jinbe_yoshi.png", name: "file.png" }
       ],
     })
   } else if (command === "aisatu_list") {
@@ -184,6 +173,17 @@ client.on("messageCreate", async message => {
         }
       ]
     })
+  } else if (command === "code") {
+    message.channel.send({
+      embeds: [
+        {
+          title: "このBOTのプログラム",
+          description: "転用可",
+          color: 0x227fff
+        }
+      ],
+      files: ['index.js']
+    });
   } else {
     message.channel.send({
       embeds: [
@@ -197,7 +197,6 @@ client.on("messageCreate", async message => {
     });
   }
 });
-
 client.on('interactionCreate', async (interaction) => {
   if (interaction.customId === "omi1" || interaction.customId === "omi2" || interaction.customId === "omi3") {
     const arr = ['大吉', '中吉', '小吉', '吉', '凶', '大凶', 'じんべえ吉', 'じんべえ凶'];
@@ -205,13 +204,12 @@ client.on('interactionCreate', async (interaction) => {
     const result = arr[random];
     
     if (random === 4 || random === 7) {
-      var file_pas = "https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/photos/jinbe_pien.png";
+      var file_pas = "photos/jinbe_pien.png";
     } else if (random === 5) {
-      var file_pas = "https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/photos/jinbe_pien2.png";
+      var file_pas = "photos/jinbe_pien2.png";
     } else {
-      var file_pas = "https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/photos/jinbe.png";
+      var file_pas = "photos/jinbe.png";
     }
-
     if (interaction.customId === "omi1") {
       var number = "1";
     } else if (interaction.customId === "omi2") {
@@ -235,14 +233,12 @@ client.on('interactionCreate', async (interaction) => {
       ],
     });
   }
-
 // じゃんけんの処理
   if (interaction.customId === "pa" || interaction.customId === "cho" || interaction.customId === "gu") {
     // じんべえの手を決める
     const arr = ['pa', 'cho', 'gu'];
     const random = Math.floor(Math.random() * arr.length);
     const jinbe = arr[random];
-
     // 自分の手を「me」に代入
     if (interaction.customId === "pa") {
       var me = "pa"
@@ -251,7 +247,6 @@ client.on('interactionCreate', async (interaction) => {
     } else if (interaction.customId === "gu") {
       var me = "gu"
     }
-
     // 結果判定    
     // 自分がパーの時
     if (interaction.customId === "pa") {
@@ -281,7 +276,6 @@ client.on('interactionCreate', async (interaction) => {
         var jan_result = "aiko"
       }
     }
-
     // 変数調整
     //me変数の日本語化
     if (me === "pa") {
@@ -307,7 +301,6 @@ client.on('interactionCreate', async (interaction) => {
     } else if (jan_result === "lose") {
       var result_jinbe_jp = "あなたの負け"
     }
-
     // 色調整
     if (jan_result === "win") {
       var color = 0xFF0000
@@ -316,16 +309,14 @@ client.on('interactionCreate', async (interaction) => {
     } else if (jan_result === "lose") {
       var color = 0x0000FF
     }
-
     // file_pass設定
     if (jan_result === "win") {
-      var file_pas = "https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/photos/win.png"
+      var file_pas = "photos/win.png"
     } else if (jan_result === "aiko") {
-      var file_pas = "https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/photos/aiko.png"
+      var file_pas = "photos/aiko.png"
     } else if (jan_result === "lose") {
-      var file_pas = "https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/photos/lose.png"
+      var file_pas = "photos/lose.png"
     }
-
     // 結果表示
     await interaction.channel.send({
       embeds: [
@@ -343,8 +334,6 @@ client.on('interactionCreate', async (interaction) => {
     });
   }
 });
-
-
 // botログイン
 const token = process.env['TOKEN']
 client.login(token);
