@@ -184,17 +184,6 @@ client.on("messageCreate", async message => {
         }
       ]
     })
-  } else if (command === "code") {
-    message.channel.send({
-      embeds: [
-        {
-          title: "このBOTのプログラム",
-          url: "https://drive.google.com/file/d/14Uazf0Kk2_2RvQkKf-WX41LugcLEwBGC/view?usp=sharing",
-          description: "転用可",
-          color: 0x227fff
-        }
-      ]
-    });
   } else {
     message.channel.send({
       embeds: [
