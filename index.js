@@ -189,11 +189,11 @@ client.on("messageCreate", async message => {
       embeds: [
         {
           title: "このBOTのプログラム",
+          url: "https://github.com/Hoshimikan6490/local-club-jinbe",
           description: "転用可",
           color: 0x227fff
         }
       ],
-      files: ['https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/index.js']
     });
   } else {
     message.channel.send({
