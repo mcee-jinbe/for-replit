@@ -189,7 +189,7 @@ client.on("messageCreate", async message => {
       embeds: [
         {
           title: "このBOTのプログラム",
-          url: "https://github.com/Hoshimikan6490/local-club-jinbe",
+          url: "https://drive.google.com/file/d/14Uazf0Kk2_2RvQkKf-WX41LugcLEwBGC/view?usp=sharing",
           description: "転用可",
           color: 0x227fff
         }
