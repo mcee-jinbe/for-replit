@@ -131,7 +131,7 @@ client.on("messageCreate", async message => {
         }
       }
       ],
-      files: [{ attachment: "photos/jinbe_yoshi.png", name: "file.png" }
+      files: [{ attachment: "https://rawgit.com/Hoshimikan6490/local-club-jinbe/main/photos/jinbe_yoshi.png", name: "file.png" }
       ],
       components: [new Discord.MessageActionRow().addComponents(tic4)]
     });
