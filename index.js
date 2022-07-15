@@ -140,7 +140,7 @@ client.on("messageCreate", async message => {
       embeds: [
         {
           title: "HELP",
-          description: "`omikuji`：おみくじを引きます。\n　`mc!help_omikuji`で、もっと詳しい内容を表示できます。\n\n`janken`：<@946587263691788399>とじゃんけんが出来ます。\n\n`mc!aisatu_list`:挨拶のリストを表示します。\n\n`mc!help`：このメッセージを表示します。\n\n`mc!about`：このBOTについて書かれています。\n\n`mc!ping`：このBOTのPing値を知ることが出来ます。\n　※このBOTのプロフィール欄にも書かれています。\n  （定期更新）\n\n`mc!code`：このBOTのプログラムを全公開！(笑)",
+          description: "`omikuji`：おみくじを引きます。\n　`mc!help_omikuji`で、もっと詳しい内容を表示できます。\n\n`janken`：<@988951430075396167>とじゃんけんが出来ます。\n\n`mc!aisatu_list`:挨拶のリストを表示します。\n\n`mc!help`：このメッセージを表示します。\n\n`mc!about`：このBOTについて書かれています。\n\n`mc!ping`：このBOTのPing値を知ることが出来ます。\n　※このBOTのプロフィール欄にも書かれています。\n  （定期更新）\n\n`mc!code`：このBOTのプログラムを全公開！(笑)",
           color: 0x227fff,
           timestamp: new Date(),
           thumbnail: {
