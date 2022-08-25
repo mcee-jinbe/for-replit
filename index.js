@@ -93,7 +93,21 @@ client.on("messageCreate", async message => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
   const args = message.content.slice(prefix.length).trim().split(' ');
   const command = args.shift().toLowerCase();
-  if (command === '2022') {
+  
+  if (command === 'archived') {
+    if (!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('あなたは、このサーバーの管理者権限を持っていません。\nこのコマンドの実行には管理者権限が必須です。');
+      //権限確認
+      message.channel.send({
+        embeds: [
+          {
+            title: 'このチャンネルはアーカイブされました',
+            color: 0xffa000,
+            timestamp: new Date()
+          }
+        ]
+      });
+      message.delete();
+  } else if (command === '2022') {
     message.channel.send({
       embeds: [
         {
