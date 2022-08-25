@@ -5,9 +5,12 @@ http.createServer(function(req, res) {
 }).listen(8080);
 
 // Discord bot implements
-const Discord = require("discord.js");
-const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES] });
+const { Client, GatewayIntentBits, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const client = new Client({
+	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages]
+});
 const prefix = "mc!"
+const token = process.env['TOKEN']
 const util = require('util')
 const wait = util.promisify(setTimeout);
 // botが準備できれば発動され、 上から順に処理される。
@@ -35,18 +38,24 @@ client.on("messageCreate", async message => {
   } else if (message.content.match(/jinbeおやすみ/)||message.content.match(/おやすみjinbe/)) {
     message.channel.send("おやすみ～\nいい夢見てね…");
   } else if (message.content === "omikuji" || message.content === "jinbe" || message.content === "omikujinbe") {
-    const tic1 = new Discord.MessageButton()
-      .setCustomId("omi1")
-      .setStyle("PRIMARY")
-      .setLabel("１を引く");
-    const tic2 = new Discord.MessageButton()
-      .setCustomId("omi2")
-      .setStyle("SUCCESS")
-      .setLabel("2を引く");
-    const tic3 = new Discord.MessageButton()
-      .setCustomId("omi3")
-      .setStyle("DANGER")
-      .setLabel("3を引く");
+    const omikuji_choice = new ActionRowBuilder()
+			.addComponents(
+				new ButtonBuilder()
+					.setCustomId('omi1')
+					.setLabel('を引く')
+					.setStyle(ButtonStyle.Primary)
+          .setEmoji("1️⃣"),
+			  new ButtonBuilder()
+					.setCustomId('omi2')
+					.setLabel('を引く')
+					.setStyle(ButtonStyle.Success)
+          .setEmoji("2️⃣"),
+			  new ButtonBuilder()
+					.setCustomId('omi3')
+					.setLabel('を引く')
+					.setStyle(ButtonStyle.Danger)
+          .setEmoji("3️⃣"),
+			);
     const replay = await message.channel.send({
       embeds: [
         {
@@ -57,57 +66,51 @@ client.on("messageCreate", async message => {
           }
         }
       ],
-      components: [new Discord.MessageActionRow().addComponents(tic1, tic2, tic3)]
+        // , tic2, tic3
+      components: [omikuji_choice]
     });
     await wait(6000)
     replay.delete()
   } else if (message.content === 'janken') {
-    const pa = new Discord.MessageButton()
-      .setCustomId("pa")
-      .setStyle("PRIMARY")
-      .setLabel("パー");
-    const cho = new Discord.MessageButton()
-      .setCustomId("cho")
-      .setStyle("SUCCESS")
-      .setLabel("チョキ");
-    const gu = new Discord.MessageButton()
-      .setCustomId("gu")
-      .setStyle("DANGER")
-      .setLabel("グー");
-    const replay = await message.channel.send({
-      embeds: [
-        {
-          title: "↓何を出す？！↓",
-          color: 0xFF0000,
-          thumbnail: {
-            url: "https://tsukatte.com/wp-content/uploads/2019/03/janken-520x520.png"
-          }
+    const janken_choice = new ActionRowBuilder()
+			.addComponents(
+				new ButtonBuilder()
+					.setCustomId('pa')
+					.setLabel('パー')
+					.setStyle(ButtonStyle.Primary)
+          .setEmoji("🖐"),
+				new ButtonBuilder()
+					.setCustomId('cho')
+					.setLabel('チョキ')
+					.setStyle(ButtonStyle.Success)
+          .setEmoji("✌"),
+				new ButtonBuilder()
+					.setCustomId('gu')
+					.setLabel('グー')
+					.setStyle(ButtonStyle.Danger)
+          .setEmoji("✊"),
+		);
+  const replay = await message.channel.send({
+    embeds: [
+      {
+        title: "↓何を出す？！↓",
+        color: 0xFF0000,
+        thumbnail: {
+          url: "https://tsukatte.com/wp-content/uploads/2019/03/janken-520x520.png"
         }
-      ],
-      components: [new Discord.MessageActionRow().addComponents(pa,cho,gu)]
+      }
+    ],
+    components: [janken_choice]
     });
     await wait(6000)
     replay.delete()
   }
+  
   // プレフィクスが必要系コマンド
   if (!message.content.startsWith(prefix) || message.author.bot) return;
   const args = message.content.slice(prefix.length).trim().split(' ');
   const command = args.shift().toLowerCase();
-  
-  if (command === 'archived') {
-    if (!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('あなたは、このサーバーの管理者権限を持っていません。\nこのコマンドの実行には管理者権限が必須です。');
-      //権限確認
-      message.channel.send({
-        embeds: [
-          {
-            title: 'このチャンネルはアーカイブされました',
-            color: 0xffa000,
-            timestamp: new Date()
-          }
-        ]
-      });
-      message.delete();
-  } else if (command === '2022') {
+  if (command === '2022') {
     message.channel.send({
       embeds: [
         {
@@ -119,10 +122,13 @@ client.on("messageCreate", async message => {
     });
     message.delete();
   } else if (command === 'about') {
-    const tic4 = new Discord.MessageButton()
-      .setStyle("LINK")
-      .setLabel("BOTを招待する")
-      .setURL("https://discord.com/api/oauth2/authorize?client_id=946587263691788399&permissions=274878000128&scope=bot");
+    const tic4 = new ActionRowBuilder()
+			.addComponents(
+				new ButtonBuilder()
+					.setURL("https://discord.com/api/oauth2/authorize?client_id=946587263691788399&permissions=274878000128&scope=bot")
+					.setLabel('BOTを招待する')
+					.setStyle(ButtonStyle.Link),
+			);
     message.channel.send({
       embeds: [{
         title: "このBOTについて",
@@ -136,7 +142,7 @@ client.on("messageCreate", async message => {
       ],
       files: [{ attachment: "photos/jinbe_yoshi.png", name: "file.png" }
       ],
-      components: [new Discord.MessageActionRow().addComponents(tic4)]
+      components: [tic4]
     });
   } else if (command === 'ping') {
     message.channel.send({
@@ -349,5 +355,4 @@ client.on('interactionCreate', async (interaction) => {
   }
 });
 // botログイン
-const token = process.env['TOKEN']
 client.login(token);
