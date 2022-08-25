@@ -1,5 +1,7 @@
 entrypoint = "index.js"
 
+hidden = [".config"]
+
 [interpreter]
 command = [
     "prybar-nodejs",
@@ -9,11 +11,20 @@ command = [
     "-i"
 ]
 
+[[hints]]
+regex = "Error \\[ERR_REQUIRE_ESM\\]"
+message = "We see that you are using require(...) inside your code. We currently do not support this syntax. Please use 'import' instead when using external modules. (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)"
+
 [nix]
 channel = "stable-21_11"
 
 [env]
 XDG_CONFIG_HOME = "/home/runner/.config"
+PATH = "/home/runner/$REPL_SLUG/.config/npm/node_global/bin:/home/runner/$REPL_SLUG/node_modules/.bin"
+npm_config_prefix = "/home/runner/$REPL_SLUG/.config/npm/node_global"
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix", ".config"]
 
 [packager]
 language = "nodejs"
