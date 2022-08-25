@@ -39,23 +39,23 @@ client.on("messageCreate", async message => {
     message.channel.send("おやすみ～\nいい夢見てね…");
   } else if (message.content === "omikuji" || message.content === "jinbe" || message.content === "omikujinbe") {
     const omikuji_choice = new ActionRowBuilder()
-			.addComponents(
-				new ButtonBuilder()
-					.setCustomId('omi1')
-					.setLabel('を引く')
-					.setStyle(ButtonStyle.Primary)
+      .addComponents(
+        new ButtonBuilder()
+          .setCustomId('omi1')
+          .setLabel('を引く')
+          .setStyle(ButtonStyle.Primary)
           .setEmoji("1️⃣"),
-			  new ButtonBuilder()
-					.setCustomId('omi2')
-					.setLabel('を引く')
-					.setStyle(ButtonStyle.Success)
+        new ButtonBuilder()
+          .setCustomId('omi2')
+          .setLabel('を引く')
+          .setStyle(ButtonStyle.Success)
           .setEmoji("2️⃣"),
-			  new ButtonBuilder()
-					.setCustomId('omi3')
-					.setLabel('を引く')
-					.setStyle(ButtonStyle.Danger)
+        new ButtonBuilder()
+          .setCustomId('omi3')
+          .setLabel('を引く')
+          .setStyle(ButtonStyle.Danger)
           .setEmoji("3️⃣"),
-			);
+      );
     const replay = await message.channel.send({
       embeds: [
         {
@@ -73,23 +73,23 @@ client.on("messageCreate", async message => {
     replay.delete()
   } else if (message.content === 'janken') {
     const janken_choice = new ActionRowBuilder()
-			.addComponents(
-				new ButtonBuilder()
-					.setCustomId('pa')
-					.setLabel('パー')
-					.setStyle(ButtonStyle.Primary)
+      .addComponents(
+        new ButtonBuilder()
+          .setCustomId('pa')
+          .setLabel('パー')
+          .setStyle(ButtonStyle.Primary)
           .setEmoji("🖐"),
-				new ButtonBuilder()
-					.setCustomId('cho')
-					.setLabel('チョキ')
-					.setStyle(ButtonStyle.Success)
+        new ButtonBuilder()
+          .setCustomId('cho')
+          .setLabel('チョキ')
+          .setStyle(ButtonStyle.Success)
           .setEmoji("✌"),
-				new ButtonBuilder()
-					.setCustomId('gu')
-					.setLabel('グー')
-					.setStyle(ButtonStyle.Danger)
+        new ButtonBuilder()
+          .setCustomId('gu')
+          .setLabel('グー')
+          .setStyle(ButtonStyle.Danger)
           .setEmoji("✊"),
-		);
+      );
   const replay = await message.channel.send({
     embeds: [
       {
@@ -123,12 +123,12 @@ client.on("messageCreate", async message => {
     message.delete();
   } else if (command === 'about') {
     const tic4 = new ActionRowBuilder()
-			.addComponents(
-				new ButtonBuilder()
-					.setURL("https://discord.com/api/oauth2/authorize?client_id=946587263691788399&permissions=274878000128&scope=bot")
-					.setLabel('BOTを招待する')
-					.setStyle(ButtonStyle.Link),
-			);
+      .addComponents(
+        new ButtonBuilder()
+          .setURL("https://discord.com/api/oauth2/authorize?client_id=946587263691788399&permissions=274878000128&scope=bot")
+          .setLabel('BOTを招待する')
+          .setStyle(ButtonStyle.Link),
+      );
     message.channel.send({
       embeds: [{
         title: "このBOTについて",
