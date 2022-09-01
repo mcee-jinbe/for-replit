@@ -219,6 +219,8 @@ client.on("messageCreate", async message => {
 });
 client.on('interactionCreate', async (interaction) => {
   if (interaction.customId === "omi1" || interaction.customId === "omi2" || interaction.customId === "omi3") {
+    const wait = require('node:timers/promises').setTimeout;
+    await interaction.deferReply();
     const arr = ['大吉', '中吉', '小吉', '吉', '凶', '大凶', 'じんべえ吉', 'じんべえ凶'];
     const random = Math.floor(Math.random() * arr.length);
     const result = arr[random];
@@ -238,7 +240,7 @@ client.on('interactionCreate', async (interaction) => {
       var number = "3";
     }
     
-    await interaction.channel.send({
+    await interaction.editReply({
       embeds: [
         {
           title: 'おみくじの結果！',
@@ -255,6 +257,8 @@ client.on('interactionCreate', async (interaction) => {
   }
 // じゃんけんの処理
   if (interaction.customId === "pa" || interaction.customId === "cho" || interaction.customId === "gu") {
+    const wait = require('node:timers/promises').setTimeout;
+    await interaction.deferReply();
     // じんべえの手を決める
     const arr = ['pa', 'cho', 'gu'];
     const random = Math.floor(Math.random() * arr.length);
@@ -338,7 +342,7 @@ client.on('interactionCreate', async (interaction) => {
       var file_pas = "photos/lose.png"
     }
     // 結果表示
-    await interaction.channel.send({
+    await interaction.editReply({
       embeds: [
         {
           title: 'じゃんけんの結果！',
