@@ -23,7 +23,7 @@ client.on("ready", () => {
       name: `所属サーバー数は、${client.guilds.cache.size}サーバー｜　Ping値は、${client.ws.ping}ms｜　replit.comで起動中です`
     })
   }, 10000)
-  client.channels.cache.get("913953017550745618").send("replit.comで起動しました！");
+  client.channels.cache.get("889486664760721418").send("replit.comで起動しました！");
   // readyイベントここまで
 });
 // botがメッセージを受信すると発動され、 上から順に処理される。
